@@ -123,6 +123,7 @@ id='texts_hint_nophoto'
 if waittillviewisshown(view,id)
 performAction('wait_for_view_by_id', 'button_open_camera')
 $donefirstscenario=1
+$browser.close
 else
         macro 'I take a screenshot'
         puts 'Cloud main page was not shown in time'
@@ -141,6 +142,7 @@ view='gridview'
 id='latestImages'
 if waittillviewisshown(view,id)
 $donefirstscenario=0
+$browser.close
 else
         macro 'I take a screenshot'
         puts 'Cloud main page with recently added items was not shown in time'

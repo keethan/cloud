@@ -12,7 +12,7 @@ $browser.close
 #shutdown_test_server
   else
 #shutdown_test_server
-$browser.close
+#$browser.close
 if $donefirstscenario==1
 system 'adb shell /system/bin/screencap -p /sdcard/pictureforcloud.png'
 sleep 2
