@@ -8,7 +8,7 @@ After do |scenario|
 screenshot_embed
 takewebscreenshot
 $webscreenshot_count += 1
-#$browser.close
+$browser.close
 #shutdown_test_server
   else
 #shutdown_test_server

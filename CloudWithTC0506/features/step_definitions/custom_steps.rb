@@ -30,6 +30,198 @@ Then /^I take screen shot of web page$/ do
 takewebscreenshot 
 end
 
+
+
+
+
+# cloud customer web page
+
+
+class BrowserContainer
+
+     def initialize(browser)
+     $browser = browser
+end
+end
+
+class Site < BrowserContainer
+
+  def login_page
+   @login_page = LoginPage.new($browser)
+end
+
+  def user_page
+   @user_page = UserPage.new($browser)
+   end
+
+  def close
+    $browser.close
+end
+end # Site
+
+class LoginPage < BrowserContainer
+
+ def open
+  $browser.goto $URL
+    self
+end
+
+  def login_as(user, pass)
+    user_field.set user
+    password_field.set pass
+    login_button.click
+sleep 3
+    next_page = UserPage.new($browser)
+    Watir::Wait.until { next_page.loaded? }
+    next_page
+  end
+
+  def user_field
+    $browser.text_field(:name => "username")
+  end
+
+  def password_field
+   $browser.text_field(:type => "password")
+  end
+
+  def login_button
+    $browser.button(:class => "buttonAubergine")
+  end
+end # LoginPage
+
+class UserPage < BrowserContainer
+
+  def logged_in?
+  Watir::Wait.until {$browser.div(:id => 'paginationLeft').exist?}
+  assert_equal($browser.span(:id => "menu-settings-account-name").exists? , true)
+# next_page = Webscreenshottaker.new($browser)
+  end
+
+  def loaded?
+    $browser.title == "Your Profile"
+     next_page = UserPage.new($browser)
+  end
+end # UserPage
+
+
+module SiteHelper
+  def site
+$webscreenshot_count ||= 0
+    @site ||= (
+      Site.new(Watir::Browser.new(:firefox))
+    )
+end
+end
+
+
+class Picturupload < BrowserContainer
+
+def uploadpicture 
+Watir::Wait.until { $browser.link(:id => 'upload').exists? }
+$browser.link(:id => 'upload').click
+next_page=Simpleupload.new($browser)
+end
+end
+
+class Simpleupload < BrowserContainer
+
+def simpleuploadpicture 
+Watir::Wait.until { $browser.link(:id => 'showSimpleUpload').exists? }
+$browser.link(:id => 'showSimpleUpload').click
+next_page=Upload.new($browser)
+end
+end
+
+class Upload < BrowserContainer
+
+def uploadpicturefile(img)
+#local_file='/home/keethan/Downloads/Buddha8.jpeg' 
+$Picturepath = '/home/keethan/Downloads/Buddha8.jpeg'
+#$Picturename = 'Buddha8.jpeg'
+Watir::Wait.until { $browser.file_field.exists? }
+$browser.file_field(:multiple => 'true').set $Picturepath
+$browser.link(:id => 'html5UploadButton').click
+Watir::Wait.until{$browser.link(:title => img).exist?}
+end
+end
+
+class Picture < BrowserContainer
+
+def openpicture(img3)
+$browser.link(:title => img3).exist?
+#$browser.link(:title => img3).click
+#Watir::Wait.until{$browser.img(:id => 'media_file').exist?}
+end
+end
+
+
+class Myfiles < BrowserContainer
+
+def myfilesmenu(img1) 
+Watir::Wait.until { $browser.link(:id => 'myfiles').exists? }
+$browser.link(:id => 'myfiles').click
+sleep 2
+Watir::Wait.until{$browser.div(:class => 'thumbnail folderRow small_').exist?}
+assert_equal($browser.text.include?(img1), false)
+end
+end
+
+
+
+
+World(SiteHelper)
+
+
+def findurl(opco)
+case opco
+
+when 'Germany'
+$URL='https://cloud-pp.vodafone.de/'
+else
+puts "URL for OpCo  #{opco}  does not found"
+end
+end
+
+
+
+
+Given /^I login to cloud '(.*)' server with '(.*)' as user and '(.*)' as password$/ do |opco, username,password|
+
+findurl(opco)
+   @login_page = site.login_page.open
+   user_page = @login_page.login_as(username,password)
+  user_page.logged_in?
+   #site.close
+
+end
+
+Then /^I take a screenshot of the cloud server customer page$/ do
+ takewebscreenshot
+end
+
+Then /^I upload '(.*)' picture to the cloud server$/ do |img|
+picturupload=Picturupload.new($browser)
+simpleupload=picturupload.uploadpicture
+upload=simpleupload.simpleuploadpicture
+upload.uploadpicturefile(img)
+end
+
+Then /^I should see the '(.*)' picture is uploaded in the cloud server$/ do |img3|
+picture=Picture.new($browser)
+picture.openpicture(img3)
+end
+
+
+
+
+
+
+
+
+
+
+
+
 # Android Client
 
 Given /^I do not have any files in the device$/ do
@@ -143,11 +335,65 @@ id='latestImages'
 if waittillviewisshown(view,id)
 $donefirstscenario=0
 $browser.close
+#shutdown_test_server
 else
         macro 'I take a screenshot'
         puts 'Cloud main page with recently added items was not shown in time'
         exit
 end
+end
+
+
+Then /^I should see login page of '(.*)'$/ do |msisdn|
+view='textview'
+id='login_userid_info'
+if waittillviewisshown(view,id)
+elapsedTime = Time.now.to_f - $startTime
+   puts "KPI-For-Nagios: cloud;status|OOBE time for checking existing account status;time="+elapsedTime.to_s+"s"
+else
+        macro 'I take a screenshot'
+        puts 'Account status was not able to show up in time'
+exit
+ end
+end
+
+
+
+When /^I proceed with login$/ do
+performAction('press_button_with_text', 'Log in')
+$startTime = Time.now.to_f
+end
+
+Then /^I am successfully login to cloud app with last uploaded photos$/ do
+view='gridview'
+id='latest_items_preview'
+if waittillviewisshown(view,id)
+else
+        macro 'I take a screenshot'
+        puts 'Cloud main page with recently uploaded photos was not shown in time'
+        exit
+end
+end
+
+And /^I delete the cloud picture from the device$/ do
+performAction('wait_for_view_by_id','menu_button')
+performAction('click_on_view_by_id','menu_button')
+performAction('wait_for_view_by_id','sliding_menu_item_photos')
+performAction('click_on_view_by_id','sliding_menu_item_photos')
+performAction('wait_for_view_by_id' , 'media_griditem_thumbnail')
+performAction('click_on_view_by_id' , 'media_griditem_thumbnail')
+performAction('wait_for_view_by_id','photos_view_pager_item_imageview')
+performAction('select_from_menu', 'Delete')
+performAction('wait_for_view_by_id' , 'delete_file_ok_button')
+performAction('click_on_view_by_id' , 'delete_file_ok_button')
+sleep 2
+performAction('wait_for_view_by_id' , 'delete_file_done_button')
+sleep 2
+performAction('click_on_view_by_id' , 'delete_file_done_button')
+performAction('wait_for_view_by_id','menu_button')
+sleep 1
+$browser.close
+shutdown_test_server
 end
 
 
