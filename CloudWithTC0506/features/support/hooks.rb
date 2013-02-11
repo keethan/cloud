@@ -8,13 +8,13 @@ After do |scenario|
 screenshot_embed
 takewebscreenshot
 $webscreenshot_count += 1
-$browser.close
+#$browser.close
 #shutdown_test_server
   else
 #shutdown_test_server
 #$browser.close
 if $donefirstscenario==1
-system 'adb shell /system/bin/screencap -p /sdcard/pictureforcloud.png'
+system 'adb push /home/keethan/Downloads/pictureforcloud.jpeg /sdcard/pictureforcloud.jpeg'
 sleep 2
 system 'adb reboot'
 sleep 80

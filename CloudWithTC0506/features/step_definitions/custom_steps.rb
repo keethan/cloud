@@ -1,12 +1,12 @@
 require 'watir-webdriver' 
 require 'test/unit'
 include Test::Unit::Assertions
+$webscreenshot_count = 0
 
 #At subscription deletion API web page
 
 When /^I login to cloud delete subcription api web page with '(.*)' and '(.*)'$/ do |username, password|
 $donefirstscenario=0
-$webscreenshot_count = 0
 $browser = Watir::Browser.new
 url = 'https://'+username+':'+password+'@survey.vfnet.de/gigui/individuals/index'
 $browser.goto url
