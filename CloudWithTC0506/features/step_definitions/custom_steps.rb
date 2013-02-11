@@ -137,7 +137,7 @@ system 'adb shell pm clear com.vodafone.cloud2'
 end
 
 
-Then /^I am successfully login to cloud app with recently added items$/ do 
+Then /^I am successfully login to cloud app with recently added items with backup now option$/ do 
 view='gridview'
 id='latestImages'
 if waittillviewisshown(view,id)

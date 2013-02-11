@@ -32,5 +32,5 @@ Then I sign up with 'aiosamy12@gmail.com' as email address and 'Keethan12' as pa
 Then I should see content backup and how to backup settings
 Then I take a screenshot
 Then I proceed with the client to backup later
-Then I am successfully login to cloud app with recently added items
+Then I am successfully login to cloud app with recently added items with backup now option
 Then I take a screenshot
