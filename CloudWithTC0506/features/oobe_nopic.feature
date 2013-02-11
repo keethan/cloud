@@ -1,9 +1,11 @@
 Feature: TC01.03, 01.04, 01.05, 01.06 Cloud OOBE for a new user
 
-Scenario: Cloud client first launch for a new user with no pictures in device and cloud
+Scenario: Delete Subcsiption for an existing user
 When I login to cloud delete subcription api web page with 'cloud2x-testing' and 'Eb6E322Du'
 Then I delete the subscription for '491720410129'
 Then I take screen shot of web page
+
+Scenario: Cloud client first launch for a new user with no pictures in device and cloud
 Given I do not have any files in the device
 Given cloud app is running on the device
 Then I take a screenshot
@@ -16,12 +18,12 @@ Then I am successfully login to cloud app with option to take a photo
 Then I take a screenshot
 
 
-
-
-Scenario: Cloud client first launch for a new user with pictures in device and not in cloud
+Scenario: Delete Subcsiption for an existing user
 When I login to cloud delete subcription api web page with 'cloud2x-testing' and 'Eb6E322Du'
 Then I delete the subscription for '491720410129'
 Then I take screen shot of web page
+
+Scenario: Cloud client first launch for a new user with pictures in device and not in cloud
 Given I do have picture in the device
 Given cloud app is running on the device
 Then I take a screenshot
