@@ -9,6 +9,7 @@ After do |scenario|
 if $device==1
 screenshot_embed
 shutdown_test_server
+$device=0
 else
 end
 
@@ -19,22 +20,13 @@ $browser.close
 else
 end
 
-
-begin 
-deletepicture
-rescue RuntimeError => e
-puts 'Delete picture from cloud'
+# pass case
+else
+if $browser.exist? 
+$browser.close
+else
 end
 
-begin
-deletemsisdn
-rescue RuntimeError => e
-puts 'Delete subscription'
-end
-
-  else
-
-#$browser.close
 if $donefirstscenario==1
 system 'adb push /home/keethan/Downloads/pictureforcloud.jpeg /sdcard/pictureforcloud.jpeg'
 sleep 2
@@ -49,6 +41,7 @@ After('@client-nopic') do
 begin
   #doc = Nokogiri::HTML(open(url))
   shutdown_test_server
+  $device=0
 rescue Errno::ECONNRESET => e
   puts "Restarting the test server"
 end
@@ -58,6 +51,7 @@ After('@client-pic') do
 begin
   #doc = Nokogiri::HTML(open(url))
   shutdown_test_server
+  $device=0
 rescue Errno::ECONNRESET => e
   puts "Restarting the test server"
 end
@@ -67,6 +61,7 @@ After('@client-cloudpic') do
 begin
   #doc = Nokogiri::HTML(open(url))
   shutdown_test_server
+  $device=0
 rescue Errno::ECONNRESET => e
   puts "Restarting the test server"
 end
@@ -76,6 +71,7 @@ After('@client-cloudpic-upload') do
 begin
   #doc = Nokogiri::HTML(open(url))
   shutdown_test_server
+  $device=0
 rescue Errno::ECONNRESET => e
   puts "Restarting the test server"
 end

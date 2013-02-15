@@ -221,7 +221,7 @@ end
 
 Then /^I take a screenshot of the cloud server myfiles page$/ do
 takewebscreenshot
-$browser.close
+#$browser.close
 
 end
 
@@ -353,7 +353,7 @@ view='gridview'
 id='latestImages'
 if waittillviewisshown(view,id)
 $donefirstscenario=0
-$browser.close
+#$browser.close
 
 else
         #macro 'I take a screenshot'
@@ -443,7 +443,7 @@ id='delete_file_done_button'
 if waittillviewisshown(view,id)
 performAction('click_on_view_by_id' , 'delete_file_done_button')
 performAction('wait_for_view_by_id','menu_button')
-$browser.close
+#$browser.close
 
 else
         #macro 'I take a screenshot'
@@ -458,6 +458,7 @@ end
 Given /^cloud app is registered and running in the device$/ do
   $startTime = Time.now.to_f
   start_test_server_in_background
+  $device=1
 view='gridview'
 id='latest_items_preview'
 if waittillviewisshown(view,id)
@@ -561,6 +562,9 @@ end
 
 
 
+
+#needed when scenarion failed going to be executed via script in jenkins
+
 def deletepicture
 @browser = Watir::Browser.new
 @browser.goto 'https://cloud-pp.vodafone.de/'
@@ -597,3 +601,93 @@ Watir::Wait.until {@browser.text.include? 'Deleted Entry with MSISDN'}
 @browser.close
 end
 
+
+Then ^/I signup$/ do
+deletepicture
+
+  start_test_server_in_background
+  $device=1
+view='textview'
+id ='textView_safe_storage_splashscreen_descr'
+if waittillviewisshown(view,id)
+else
+        #macro 'I take a screenshot'
+        puts 'Safe storage details view was not able to show up in time'
+        performAction('wait_for_view_by_id', 'expectedview',1)
+        #exit
+        end
+
+performAction('wait_for_view_by_id', 'buttonnext_safestorage_splashscreen')
+performAction('click_on_view_by_id', 'buttonnext_safestorage_splashscreen')
+view='textview'
+id ='textView_automatic_upload_splashscreen_descr'
+if waittillviewisshown(view,id)
+        performAction('wait_for_view_by_id', 'buttonnext_safestorage_splashscreen')
+        performAction('click_on_view_by_id', 'buttonnext_safestorage_splashscreen')
+         $startTime = Time.now.to_f
+else
+        #macro 'I take a screenshot'
+        puts 'Automatic upload details view was not able to show up in time'
+        performAction('wait_for_view_by_id', 'expectedview',1)
+        #exit
+        end
+
+view='textview'
+id='registration_userid_info'
+if waittillviewisshown(view,id)
+elapsedTime = Time.now.to_f - $startTime
+   puts "KPI-For-Nagios: cloud;status|OOBE time for checking account status;time="+elapsedTime.to_s+"s"
+   performAction('wait_for_view_by_id', 'registration_email_input')
+   performAction('enter_text_into_id_field', 'aiosamy15@gmail.com', 'registration_email_input')
+      performAction('wait_for_view_by_id', 'registration_password_input')
+      performAction('enter_text_into_id_field', 'Keethan12', 'registration_password_input')
+      performAction('wait_for_view_by_id', 'registration_password_repeat')
+      performAction('enter_text_into_id_field', 'keethan12', 'registration_password_repeat')
+            performAction('wait_for_view_by_id', 'registration_terms_and_conditions_checkbox')
+      performAction('click_on_view_by_id','registration_terms_and_conditions_checkbox')
+      performAction('wait_for_view_by_id', 'registration_signup_button')
+      performAction('click_on_view_by_id','registration_signup_button')
+      $startTime = Time.now.to_f
+      
+else
+        #macro 'I take a screenshot'
+        puts 'Account status was not able to show up in time'
+        performAction('wait_for_view_by_id', 'expectedview',1)
+        #exit
+        end
+
+view='textview'
+id = 'textview_backup_media_type_choices_descr'
+if waittillviewisshown(view,id)
+
+else
+       #macro 'I take a screenshot'
+        puts 'Not able signup in time'
+performAction('wait_for_view_by_id', 'expectedview',1)
+#exit
+end
+performAction('wait_for_view_by_id', 'button_next_step')
+performAction('click_on_view_by_id', 'button_next_step')
+
+
+performAction('wait_for_view_by_id', 'button_backup_later')
+performAction('click_on_view_by_id', 'button_backup_later')
+
+
+view='textview'
+id='texts_hint_nophoto'
+if waittillviewisshown(view,id)
+performAction('wait_for_view_by_id', 'button_open_camera')
+$donefirstscenario=1
+#$browser.close
+else
+        #macro 'I take a screenshot'
+        puts 'Cloud main page was not shown in time'
+        performAction('wait_for_view_by_id', 'expectedview',1)
+        #exit
+end
+end
+
+Then ^/I delete cloud picture$/ do
+deletepicture
+end
