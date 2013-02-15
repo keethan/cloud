@@ -43,11 +43,8 @@ rescue RuntimeError => e
 puts 'Delete subscription'
 end
 
-begin
 Cucumber.wants_to_quit = true
-rescue RuntimeError => e
 puts ' Scenario fail stopping the test run '
-end
   else
 
 #$browser.close
