@@ -5,7 +5,7 @@ $webscreenshot_count = 0
 
 #At subscription deletion API web page
 
-When /^I login to cloud delete subcription api web page with '(.*)' and '(.*)'$/ do |username, password|
+When /^I login to cloud delete subscription api web page with '(.*)' and '(.*)'$/ do |username, password|
 $donefirstscenario=0
 $browser = Watir::Browser.new
 url = 'https://'+username+':'+password+'@survey.vfnet.de/gigui/individuals/index'
@@ -16,7 +16,7 @@ end
 Then /^I delete the subscription for '(.*)'$/ do |msisdn|
 $browser.text_field(:name => 'msisdn').set msisdn
 $browser.button(:class => 'btn btn btn-danger').click
-Watir::Wait.until {$browser.text.include? 'Deleted Entry with MSISDN 491720410129'}
+Watir::Wait.until {$browser.text.include? 'Deleted Entry with MSISDN'}
 end
 
 def takewebscreenshot 
@@ -214,6 +214,20 @@ end
 
 
 
+Then /^I should not see '(.*)' picture in cloud server$/ do |img1|
+myfiles = Myfiles.new($browser)
+myfiles.myfilesmenu(img1)
+end
+
+
+Then /^I take a screenshot of the cloud server myfiles page$/ do
+takewebscreenshot
+$browser.close
+
+end
+
+
+
 
 
 
@@ -335,7 +349,7 @@ id='latestImages'
 if waittillviewisshown(view,id)
 $donefirstscenario=0
 $browser.close
-#shutdown_test_server
+
 else
         macro 'I take a screenshot'
         puts 'Cloud main page with recently added items was not shown in time'
@@ -380,20 +394,131 @@ performAction('wait_for_view_by_id','menu_button')
 performAction('click_on_view_by_id','menu_button')
 performAction('wait_for_view_by_id','sliding_menu_item_photos')
 performAction('click_on_view_by_id','sliding_menu_item_photos')
+
+count = 1
+  
+while (count <=10)
+sleep 1
+
+#puts (query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail')
+if ((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail') == true)
+assert_equal((query("textview id:'backup_status_text'").to_s.include? '1 photo'), true)
+break
+else
+performAction('go_back')
+performAction('wait_for_view_by_id','menu_button')
+performAction('click_on_view_by_id','menu_button')
+performAction('wait_for_view_by_id','sliding_menu_item_photos')
+performAction('click_on_view_by_id','sliding_menu_item_photos')
+count = count + 1
+ if ((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail') == false && count >= 10) then
+        macro 'I take a screenshot'
+        assert(false ,'Upload picture was not able to show up in time')
+exit
+    else end
+    end
+end
+
 performAction('wait_for_view_by_id' , 'media_griditem_thumbnail')
 performAction('click_on_view_by_id' , 'media_griditem_thumbnail')
 performAction('wait_for_view_by_id','photos_view_pager_item_imageview')
 performAction('select_from_menu', 'Delete')
 performAction('wait_for_view_by_id' , 'delete_file_ok_button')
 performAction('click_on_view_by_id' , 'delete_file_ok_button')
-sleep 2
-performAction('wait_for_view_by_id' , 'delete_file_done_button')
-sleep 2
+
+#performAction('wait_for_view_by_id' , 'delete_file_done_button')
+
+view='button'
+id='delete_file_done_button'
+if waittillviewisshown(view,id)
 performAction('click_on_view_by_id' , 'delete_file_done_button')
 performAction('wait_for_view_by_id','menu_button')
-sleep 1
 $browser.close
-shutdown_test_server
+
+else
+        macro 'I take a screenshot'
+        puts 'Picture deletion was not done in time'
+        exit
+        end
+end
+
+
+
+Given /^cloud app is registered and running in the device$/ do
+  $startTime = Time.now.to_f
+  start_test_server_in_background
+view='gridview'
+id='latest_items_preview'
+if waittillviewisshown(view,id)
+elapsedTime = Time.now.to_f - $startTime
+   puts "KPI-For-Nagios: cloud;startup|OOBE startup time for cloud app;time="+elapsedTime.to_s+"s"
+else
+        macro 'I take a screenshot'
+        puts 'Cloud main page with recently uploaded photos was not shown in time'
+        exit
+        end
+end
+
+
+Then /^I open the cloud photos menu$/ do
+performAction('wait_for_view_by_id','menu_button')
+performAction('click_on_view_by_id','menu_button')
+performAction('wait_for_view_by_id','sliding_menu_item_photos')
+performAction('click_on_view_by_id','sliding_menu_item_photos')
+end
+
+Then /^I should see the uploded 'Buddha8.jpeg' picture$/ do
+
+count = 1
+  
+while (count <=10)
+sleep 1
+
+#puts (query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail')
+if ((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail') == true)
+assert_equal((query("textview id:'backup_status_text'").to_s.include? '1 photo'), true)
+break
+else
+performAction('go_back')
+performAction('wait_for_view_by_id','menu_button')
+performAction('click_on_view_by_id','menu_button')
+performAction('wait_for_view_by_id','sliding_menu_item_photos')
+performAction('click_on_view_by_id','sliding_menu_item_photos')
+count = count + 1
+ if ((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail') == false && count >= 10) then
+        macro 'I take a screenshot'
+        assert(false ,'Upload picture was not able to show up in time')
+exit
+    else end
+end
+end
+end
+
+Then /^I open the uploaded picture$/ do
+performAction('wait_for_view_by_id' , 'media_griditem_thumbnail')
+performAction('click_on_view_by_id' , 'media_griditem_thumbnail')
+#performAction('wait_for_view_by_id' , 'photos_view_pager')
+performAction('wait_for_view_by_id','photos_view_pager_item_imageview')
+end
+
+And /^I delete the picture$/ do
+performAction('select_from_menu', 'Delete')
+performAction('wait_for_view_by_id' , 'delete_file_ok_button')
+performAction('click_on_view_by_id' , 'delete_file_ok_button')
+#performAction('wait_for_view_by_id' , 'delete_file_done_button')
+view='button'
+id='delete_file_done_button'
+if waittillviewisshown(view,id)
+performAction('click_on_view_by_id' , 'delete_file_done_button')
+performAction('wait_for_view_by_id','menu_button')
+#assert_equal((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail'), false)
+assert_equal((query("textview id:'backup_status_text'").to_s.include? '0 photos'), true)
+
+else
+        macro 'I take a screenshot'
+        puts 'Picture deletion was not done in time'
+        exit
+        end
 end
 
 
