@@ -5,6 +5,7 @@ AfterConfiguration do |config|
 end
 
 Before do |scenario|
+
   @scenario_is_outline = (scenario.class == Cucumber::Ast::OutlineTable::ExampleRow)
   if @scenario_is_outline 
     scenario = scenario.scenario_outline 
@@ -18,7 +19,8 @@ Before do |scenario|
     else
       log "First scenario in feature - reinstalling apps"
     end
-    
+   
+
     uninstall_apps
     install_app(ENV["TEST_APP_PATH"])
     #install_app(ENV["APP_PATH"])
