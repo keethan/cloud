@@ -1,9 +1,40 @@
 require 'watir-webdriver' 
 require 'test/unit'
 include Test::Unit::Assertions
+$webscreenshot_count = 0
+
+#At subscription deletion API web page
+
+When /^I login to cloud delete subscription api web page with '(.*)' and '(.*)'$/ do |username, password|
+$donefirstscenario=0
+$browser = Watir::Browser.new
+url = 'https://'+username+':'+password+'@survey.vfnet.de/gigui/individuals/index'
+$browser.goto url
+Watir::Wait.until {$browser.text_field(:name => 'msisdn').exist?}
+end
+
+Then /^I delete the subscription for '(.*)'$/ do |msisdn|
+$browser.text_field(:name => 'msisdn').set msisdn
+$browser.button(:class => 'btn btn btn-danger').click
+Watir::Wait.until {$browser.text.include? 'Deleted Entry with MSISDN'}
+end
+
+def takewebscreenshot 
+$screenshotname = "webscreenshot#{$webscreenshot_count}.png"
+$browser.screenshot.save($screenshotname)
+embed $screenshotname, 'image/png'
+$webscreenshot_count += 1
+end 
+
+Then /^I take screen shot of web page$/ do
+takewebscreenshot 
+end
 
 
 
+
+
+# cloud customer web page
 
 
 class BrowserContainer
@@ -105,7 +136,7 @@ class Upload < BrowserContainer
 
 def uploadpicturefile(img)
 #local_file='/home/keethan/Downloads/Buddha8.jpeg' 
-$Picturepath = '/home/keethan/Downloads/Buddha8.jpeg'
+$Picturepath = '/home/muthu/Downloads/Buddha8.jpeg'
 #$Picturename = 'Buddha8.jpeg'
 Watir::Wait.until { $browser.file_field.exists? }
 $browser.file_field(:multiple => 'true').set $Picturepath
@@ -140,13 +171,6 @@ end
 
 World(SiteHelper)
 
-
-def takewebscreenshot 
-$screenshotname = "webscreenshot#{$webscreenshot_count}.png"
-$browser.screenshot.save($screenshotname)
-embed $screenshotname, 'image/png'
-$webscreenshot_count += 1
-end 
 
 def findurl(opco)
 case opco
@@ -189,6 +213,7 @@ end
 
 
 
+
 Then /^I should not see '(.*)' picture in cloud server$/ do |img1|
 myfiles = Myfiles.new($browser)
 myfiles.myfilesmenu(img1)
@@ -198,44 +223,241 @@ end
 Then /^I take a screenshot of the cloud server myfiles page$/ do
 takewebscreenshot
 $browser.close
-shutdown_test_server
+
 end
+
+
+
+
+
+
+
+
+
+
 
 # Android Client
-Given /^cloud app is running in the device$/ do
-      $startTime = Time.now.to_f
-  start_test_server_in_background
 
-begin
+Given /^I do not have any files in the device$/ do
+system 'adb shell pm clear com.vodafone.cloud2'
+end
+
+Given /^cloud app is running on the device$/ do
+  $startTime = Time.now.to_f
+  start_test_server_in_background
+view='textview'
+id ='textView_safe_storage_splashscreen_descr'
+if waittillviewisshown(view,id)
+elapsedTime = Time.now.to_f - $startTime
+   puts "KPI-For-Nagios: cloud;startup|OOBE startup time for cloud app;time="+elapsedTime.to_s+"s"
+else
+        macro 'I take a screenshot'
+        puts 'Safe storage details view was not able to show up in time'
+        exit
+        end
+end
+
+Then /^I should see Safe storage and Automatic upload instruction and I  navigate to next page$/ do
+performAction('wait_for_view_by_id', 'buttonnext_safestorage_splashscreen')
+performAction('click_on_view_by_id', 'buttonnext_safestorage_splashscreen')
+view='textview'
+id ='textView_automatic_upload_splashscreen_descr'
+if waittillviewisshown(view,id)
+        performAction('wait_for_view_by_id', 'buttonnext_safestorage_splashscreen')
+        performAction('click_on_view_by_id', 'buttonnext_safestorage_splashscreen')
+         $startTime = Time.now.to_f
+else
+        macro 'I take a screenshot'
+        puts 'Automatic upload details view was not able to show up in time'
+        exit
+        end
+end
+
+Then /^I sign up with '(.*)' as email address and '(.*)' as password$/ do |email,pass|
+view='textview'
+id='registration_userid_info'
+if waittillviewisshown(view,id)
+elapsedTime = Time.now.to_f - $startTime
+   puts "KPI-For-Nagios: cloud;status|OOBE time for checking account status;time="+elapsedTime.to_s+"s"
+   performAction('wait_for_view_by_id', 'registration_email_input')
+   performAction('enter_text_into_id_field', email, 'registration_email_input')
+      performAction('wait_for_view_by_id', 'registration_password_input')
+      performAction('enter_text_into_id_field', pass, 'registration_password_input')
+      performAction('wait_for_view_by_id', 'registration_password_repeat')
+      performAction('enter_text_into_id_field', pass, 'registration_password_repeat')
+            performAction('wait_for_view_by_id', 'registration_terms_and_conditions_checkbox')
+      performAction('click_on_view_by_id','registration_terms_and_conditions_checkbox')
+      performAction('wait_for_view_by_id', 'registration_signup_button')
+      performAction('click_on_view_by_id','registration_signup_button')
+      $startTime = Time.now.to_f
+      
+else
+        macro 'I take a screenshot'
+        puts 'Account status was not able to show up in time'
+        exit
+        end
+end
+
+
+Then /^I should see content backup and how to backup settings$/ do
+view='textview'
+id = 'textview_backup_media_type_choices_descr'
+if waittillviewisshown(view,id)
+elapsedTime = Time.now.to_f - $startTime
+puts "KPI-For-Nagios: cloud;signup|OOBE signup time;time="+elapsedTime.to_s+"s"
+
+else
+       macro 'I take a screenshot'
+        puts 'Not able signup in time'
+exit
+end
+performAction('wait_for_view_by_id', 'button_next_step')
+performAction('click_on_view_by_id', 'button_next_step')
+end
+
+
+Then /^I proceed with the client to backup later$/ do
+performAction('wait_for_view_by_id', 'button_backup_later')
+performAction('click_on_view_by_id', 'button_backup_later')
+end
+
+
+
+Then /^I am successfully login to cloud app with option to take a photo$/ do
+view='textview'
+id='texts_hint_nophoto'
+if waittillviewisshown(view,id)
+performAction('wait_for_view_by_id', 'button_open_camera')
+$donefirstscenario=1
+$browser.close
+else
+        macro 'I take a screenshot'
+        puts 'Cloud main page was not shown in time'
+        exit
+end
+end
+
+
+Given /^I do have picture in the device$/ do
+system 'adb shell pm clear com.vodafone.cloud2'
+end
+
+
+Then /^I am successfully login to cloud app with recently added items with backup now option$/ do 
+view='gridview'
+id='latestImages'
+if waittillviewisshown(view,id)
+$donefirstscenario=0
+$browser.close
+
+else
+        macro 'I take a screenshot'
+        puts 'Cloud main page with recently added items was not shown in time'
+        exit
+end
+end
+
+
+Then /^I should see login page of '(.*)'$/ do |msisdn|
+view='textview'
+id='login_userid_info'
+if waittillviewisshown(view,id)
+elapsedTime = Time.now.to_f - $startTime
+   puts "KPI-For-Nagios: cloud;status|OOBE time for checking existing account status;time="+elapsedTime.to_s+"s"
+else
+        macro 'I take a screenshot'
+        puts 'Account status was not able to show up in time'
+exit
+ end
+end
+
+
+
+When /^I proceed with login$/ do
+performAction('press_button_with_text', 'Log in')
+$startTime = Time.now.to_f
+end
+
+Then /^I am successfully login to cloud app with last uploaded photos$/ do
+view='gridview'
+id='latest_items_preview'
+if waittillviewisshown(view,id)
+else
+        macro 'I take a screenshot'
+        puts 'Cloud main page with recently uploaded photos was not shown in time'
+        exit
+end
+end
+
+And /^I delete the cloud picture from the device$/ do
+performAction('wait_for_view_by_id','menu_button')
+performAction('click_on_view_by_id','menu_button')
+performAction('wait_for_view_by_id','sliding_menu_item_photos')
+performAction('click_on_view_by_id','sliding_menu_item_photos')
+
 count = 1
   
-while (count <=100)
-sleep 0.2
+while (count <=10)
+sleep 1
 
-#puts (query("gridview id:'latestImages'").to_s.include? 'latestImages')
-if (query("gridview id:'latest_items_preview'").to_s.include? 'latest_items_preview') == true
+#puts (query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail')
+if ((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail') == true)
+assert_equal((query("textview id:'backup_status_text'").to_s.include? '1 photo'), true)
 break
 else
+performAction('go_back')
+performAction('wait_for_view_by_id','menu_button')
+performAction('click_on_view_by_id','menu_button')
+performAction('wait_for_view_by_id','sliding_menu_item_photos')
+performAction('click_on_view_by_id','sliding_menu_item_photos')
 count = count + 1
- if ((query("gridview id:'latest_items_preview'").to_s.include? 'latest_items_preview') == false && count >= 100) then
+ if ((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail') == false && count >= 10) then
         macro 'I take a screenshot'
-        assert(false ,'Latest uploaded picture was not able to show up in time')
+        assert(false ,'Upload picture was not able to show up in time')
 exit
     else end
+    end
 end
 
+performAction('wait_for_view_by_id' , 'media_griditem_thumbnail')
+performAction('click_on_view_by_id' , 'media_griditem_thumbnail')
+performAction('wait_for_view_by_id','photos_view_pager_item_imageview')
+performAction('select_from_menu', 'Delete')
+performAction('wait_for_view_by_id' , 'delete_file_ok_button')
+performAction('click_on_view_by_id' , 'delete_file_ok_button')
+
+#performAction('wait_for_view_by_id' , 'delete_file_done_button')
+
+view='button'
+id='delete_file_done_button'
+if waittillviewisshown(view,id)
+performAction('click_on_view_by_id' , 'delete_file_done_button')
+performAction('wait_for_view_by_id','menu_button')
+$browser.close
+
+else
+        macro 'I take a screenshot'
+        puts 'Picture deletion was not done in time'
+        exit
+        end
 end
 
+
+
+Given /^cloud app is registered and running in the device$/ do
+  $startTime = Time.now.to_f
+  start_test_server_in_background
+view='gridview'
+id='latest_items_preview'
+if waittillviewisshown(view,id)
 elapsedTime = Time.now.to_f - $startTime
-   puts "KPI-For-Nagios: cloud;startup|Startup time for cloud app till the menu button being displayed;time="+elapsedTime.to_s+"s"
-rescue Exception => e
-
-        puts "SERVICE_ERROR;service=cloud;use_case=picture up load;error_desc=uploaded picture did not appear in cloud main page"
-        raise e
+   puts "KPI-For-Nagios: cloud;startup|OOBE startup time for cloud app;time="+elapsedTime.to_s+"s"
+else
+        macro 'I take a screenshot'
+        puts 'Cloud main page with recently uploaded photos was not shown in time'
+        exit
+        end
 end
-end
-
-
 
 
 Then /^I open the cloud photos menu$/ do
@@ -269,14 +491,7 @@ count = count + 1
 exit
     else end
 end
-
 end
-end
-
-
-
-Then /^I take a screenshot in the device$/ do
-screenshot_embed
 end
 
 Then /^I open the uploaded picture$/ do
@@ -290,12 +505,35 @@ And /^I delete the picture$/ do
 performAction('select_from_menu', 'Delete')
 performAction('wait_for_view_by_id' , 'delete_file_ok_button')
 performAction('click_on_view_by_id' , 'delete_file_ok_button')
-sleep 2
-performAction('wait_for_view_by_id' , 'delete_file_done_button')
-sleep 2
+#performAction('wait_for_view_by_id' , 'delete_file_done_button')
+view='button'
+id='delete_file_done_button'
+if waittillviewisshown(view,id)
 performAction('click_on_view_by_id' , 'delete_file_done_button')
 performAction('wait_for_view_by_id','menu_button')
-sleep 1
 #assert_equal((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail'), false)
 assert_equal((query("textview id:'backup_status_text'").to_s.include? '0 photos'), true)
+
+else
+        macro 'I take a screenshot'
+        puts 'Picture deletion was not done in time'
+        exit
+        end
+end
+
+
+def waittillviewisshown(view,id)
+count = 1  
+while (count <=200)
+queryparam = "\""+view+ " id:'" + id + "'"
+sleep 0.2
+if (query(queryparam).to_s.include? id) == true
+return true
+else
+count = count + 1
+ if ((query(queryparam).to_s.include? id) == false && count >= 200) then
+return false
+else end 
+end
+end
 end
