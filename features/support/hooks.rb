@@ -8,13 +8,13 @@ After do |scenario|
 
 begin
 screenshot_embed
-rescue RuntimeError => e
+rescue NoMethodError => e
   puts "Cloud app is not yet started" 
   end 
 begin 
 takewebscreenshot
 $webscreenshot_count += 1
-rescue RuntimeError => e
+rescue NoMethodError => e
   puts "Browser is already closed" 
   end 
 
@@ -43,10 +43,11 @@ rescue RuntimeError => e
 puts 'Delete subscription'
 end
 
-
+begin
 Cucumber.wants_to_quit = true
+rescue RuntimeError => e
 puts ' Scenario fail stopping the test run '
-
+end
   else
 
 #$browser.close
