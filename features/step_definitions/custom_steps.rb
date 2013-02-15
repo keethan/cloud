@@ -547,7 +547,6 @@ end
 
 
 def deletepicture
-require 'watir-webdriver'
 @browser = Watir::Browser.new
 @browser.goto 'https://cloud-pp.vodafone.de/'
 Watir::Wait.until { @browser.text_field(:name => "username").exists? }
