@@ -244,6 +244,7 @@ end
 Given /^cloud app is running on the device$/ do
   $startTime = Time.now.to_f
   start_test_server_in_background
+  $device=1
 view='textview'
 id ='textView_safe_storage_splashscreen_descr'
 if waittillviewisshown(view,id)
