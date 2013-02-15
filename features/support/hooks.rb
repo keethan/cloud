@@ -95,4 +95,3 @@ rescue Errno::ECONNRESET => e
   puts "Restarting the test server"
 end
 end
-end
