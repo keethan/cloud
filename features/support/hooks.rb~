@@ -11,10 +11,10 @@ screenshot_embed
 takewebscreenshot
 $webscreenshot_count += 1
 $browser.close
-Cucumber.wants_to_quit = true
-puts ' Scenario fail stopping the test run '
 shutdown_test_server
 
+Cucumber.wants_to_quit = true
+puts ' cucumber should exit now Vinay is saying '
   else
 
 #$browser.close
