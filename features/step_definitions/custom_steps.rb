@@ -602,7 +602,7 @@ Watir::Wait.until {@browser.text.include? 'Deleted Entry with MSISDN'}
 end
 
 
-Then ^/I signup$/ do
+Then /^I signup$/ do
 deletepicture
 
   start_test_server_in_background
@@ -688,6 +688,6 @@ else
 end
 end
 
-Then ^/I delete cloud picture$/ do
+Then /^I delete cloud picture$/ do
 deletepicture
 end
