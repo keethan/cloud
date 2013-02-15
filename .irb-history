@@ -6,3 +6,11 @@ performAction('wait_for_view_by_id', 'expectedviewnotfound')
 performAction('wait_for_view_by_id', 'expectedviewnotfound',0.001)
 performAction('wait_for_view_by_id', 'expectedviewnotfound')
 exit
+start_test_server_in_background
+performAction('wait_for_view_by_id', 'expectedview',1)
+performAction('wait_for_view_by_id',1, 'expectedview')
+performAction('wait_for_view_by_id', 'expectedview',1)
+exit
+start_test_server_in_background
+query ("textview text:'My Cloud'")
+exit

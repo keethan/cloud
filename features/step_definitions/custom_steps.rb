@@ -674,11 +674,9 @@ performAction('click_on_view_by_id', 'button_backup_later')
 
 
 view='textview'
-id='texts_hint_nophoto'
+id='My Cloud'
 if waittillviewisshown(view,id)
-performAction('wait_for_view_by_id', 'button_open_camera')
-$donefirstscenario=1
-#$browser.close
+
 else
         #macro 'I take a screenshot'
         puts 'Cloud main page was not shown in time'
