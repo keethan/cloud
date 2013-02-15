@@ -20,13 +20,13 @@ rescue NoMethodError => e
 
 begin
 $browser.close
-rescue RuntimeError => e
+rescue NoMethodError => e
   puts "Browser is already closed" 
   end 
   
 begin
 shutdown_test_server
-rescue RuntimeError => e
+rescue NoMethodError => e
   puts "Shuting down the test server"  
  end 
 

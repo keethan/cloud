@@ -8,25 +8,25 @@ After do |scenario|
 
 begin
 screenshot_embed
-rescue RuntimeError => e
+rescue NoMethodError => e
   puts "Cloud app is not yet started" 
   end 
 begin 
 takewebscreenshot
 $webscreenshot_count += 1
-rescue RuntimeError => e
+rescue NoMethodError => e
   puts "Browser is already closed" 
   end 
 
 begin
 $browser.close
-rescue RuntimeError => e
+rescue NoMethodError => e
   puts "Browser is already closed" 
   end 
   
 begin
 shutdown_test_server
-rescue RuntimeError => e
+rescue NoMethodError => e
   puts "Shuting down the test server"  
  end 
 
