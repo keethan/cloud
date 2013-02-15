@@ -328,7 +328,7 @@ id='texts_hint_nophoto'
 if waittillviewisshown(view,id)
 performAction('wait_for_view_by_id', 'button_open_camera')
 $donefirstscenario=1
-$browser.close
+#$browser.close
 else
         macro 'I take a screenshot'
         puts 'Cloud main page was not shown in time'

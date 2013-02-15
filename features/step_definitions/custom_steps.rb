@@ -332,7 +332,8 @@ $donefirstscenario=1
 else
         macro 'I take a screenshot'
         puts 'Cloud main page was not shown in time'
-        exit
+        performAction('wait_for_view_by_id', 'expectedview',1)
+        #exit
 end
 end
 

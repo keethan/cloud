@@ -1,0 +1,8 @@
+start_test_server_in_background
+performAction('time_out_exit')
+performAction('wait_for_view_by_id', 'expectedviewnotfound',1)
+performAction('wait_for_view_by_id', 'expectedviewnotfound',0)
+performAction('wait_for_view_by_id', 'expectedviewnotfound')
+performAction('wait_for_view_by_id', 'expectedviewnotfound',0.001)
+performAction('wait_for_view_by_id', 'expectedviewnotfound')
+exit
