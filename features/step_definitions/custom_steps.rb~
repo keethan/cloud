@@ -673,16 +673,16 @@ performAction('wait_for_view_by_id', 'button_backup_later')
 performAction('click_on_view_by_id', 'button_backup_later')
 
 
-view='textview'
-id='My Cloud'
-if waittillviewisshown(view,id)
+#view='textview'
+#id='My Cloud'
+#if waittillviewisshown(view,id)
 
-else
+#else
         #macro 'I take a screenshot'
-        puts 'Cloud main page was not shown in time'
-        performAction('wait_for_view_by_id', 'expectedview',1)
+ #       puts 'Cloud main page was not shown in time'
+  #      performAction('wait_for_view_by_id', 'expectedview',1)
         #exit
-end
+#end
 end
 
 Then /^I delete cloud picture$/ do

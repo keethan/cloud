@@ -135,7 +135,7 @@ class Upload < BrowserContainer
 
 def uploadpicturefile(img)
 #local_file='/home/keethan/Downloads/Buddha8.jpeg' 
-$Picturepath = '/home/muthu/Downloads/Buddha8.jpeg'
+$Picturepath = '/home/keethan/Downloads/Buddha8.jpeg'
 #$Picturename = 'Buddha8.jpeg'
 Watir::Wait.until { $browser.file_field.exists? }
 $browser.file_field(:multiple => 'true').set $Picturepath
