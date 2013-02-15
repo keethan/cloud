@@ -688,6 +688,6 @@ else
 end
 end
 
-Then ^/I delete cloud picture$/ do
+Then /^I delete cloud picture$/ do
 deletepicture
 end
