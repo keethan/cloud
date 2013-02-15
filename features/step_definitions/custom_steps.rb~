@@ -603,7 +603,6 @@ end
 
 
 Then /^I signup$/ do
-deletepicture
 
   start_test_server_in_background
   $device=1
