@@ -4,9 +4,8 @@ Before do |scenario|
 end
 
 After do |scenario|
-puts ' cucumber shouldnot exit now vinay is saying '
   if scenario.failed?
-  puts ' cucumber scenario failed exit now vinay is saying '
+
 begin
 screenshot_embed
 rescue RuntimeError => e
