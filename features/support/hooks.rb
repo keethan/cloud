@@ -29,6 +29,21 @@ shutdown_test_server
 rescue RuntimeError => e
   puts "Shuting down the test server"  
  end 
+
+
+begin 
+deletepicture
+rescue RuntimeError => e
+puts 'Delete picture from cloud'
+end
+
+begin
+deletemsisdn
+rescue RuntimeError => e
+puts 'Delete subscription'
+end
+
+
 Cucumber.wants_to_quit = true
 puts ' Scenario fail stopping the test run '
 
@@ -78,5 +93,6 @@ begin
   shutdown_test_server
 rescue Errno::ECONNRESET => e
   puts "Restarting the test server"
+end
 end
 end

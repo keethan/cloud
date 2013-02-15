@@ -1,10 +1,10 @@
 Feature: TC01.03, 01.04, 01.05, 01.06 Cloud OOBE for a new user
 
-@web
-Scenario: Delete Subscription for an existing user
-When I login to cloud delete subscription api web page with 'cloud2x-testing' and 'Eb6E322Du'
-Then I delete the subscription for '491720451021'
-Then I take screen shot of web page
+#@web
+#Scenario: Delete Subscription for an existing user
+#When I login to cloud delete subscription api web page with 'cloud2x-testing' and 'Eb6E322Du'
+#Then I delete the subscription for '491720451021'
+#Then I take screen shot of web page
 
 @client-nopic
 Scenario: Cloud client first launch for a new user with no pictures in device and cloud

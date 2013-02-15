@@ -2,7 +2,6 @@ require 'watir-webdriver'
 require 'test/unit'
 include Test::Unit::Assertions
 $webscreenshot_count = 0
-
 #At subscription deletion API web page
 
 When /^I login to cloud delete subscription api web page with '(.*)' and '(.*)'$/ do |username, password|
@@ -510,9 +509,11 @@ view='button'
 id='delete_file_done_button'
 if waittillviewisshown(view,id)
 performAction('click_on_view_by_id' , 'delete_file_done_button')
+$deletedone = 1
 performAction('wait_for_view_by_id','menu_button')
 #assert_equal((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail'), false)
 assert_equal((query("textview id:'backup_status_text'").to_s.include? '0 photos'), true)
+
 
 else
         macro 'I take a screenshot'
@@ -522,18 +523,63 @@ else
 end
 
 
+
+
+
+
 def waittillviewisshown(view,id)
 count = 1  
-while (count <=200)
+while (count <=150)
 queryparam = "\""+view+ " id:'" + id + "'"
 sleep 0.2
 if (query(queryparam).to_s.include? id) == true
 return true
 else
 count = count + 1
- if ((query(queryparam).to_s.include? id) == false && count >= 200) then
+ if ((query(queryparam).to_s.include? id) == false && count >= 150) then
 return false
 else end 
 end
+end
+end
+
+
+
+
+def deletepicture
+require 'watir-webdriver'
+@browser = Watir::Browser.new
+@browser.goto 'https://cloud-pp.vodafone.de/'
+Watir::Wait.until { @browser.text_field(:name => "username").exists? }
+@browser.text_field(:name => "username").set 'aiosamy15@gmail.com'
+@browser.text_field(:type => "password").set 'Keethan12'
+@browser.button(:class => "buttonAubergine").click
+Watir::Wait.until { @browser.link(:id => 'myfiles').exists? }
+@browser.link(:id => 'myfiles').click
+sleep 2
+Watir::Wait.until{@browser.div(:class => 'thumbnail folderRow small_').exist?}
+Watir::Wait.until{@browser.link(:title => 'Buddha8.jpeg').exist?}
+@browser.link(:title => 'Buddha8.jpeg').right_click
+
+Watir::Wait.until{@browser.link(:id => 'FileOptionsMenu_filemenu.delete').exist?}
+@browser.link(:id => 'FileOptionsMenu_filemenu.delete').click
+
+Watir::Wait.until{@browser.link(:id => 'confirmDeleteForever').exist?}
+@browser.link(:id => 'confirmDeleteForever').click
+sleep 3
+Watir::Wait.until{@browser.div(:class => 'thumbnail folderRow small_').exist?}
+@browser.close
+end
+
+
+def deletemsisdn
+@browser = Watir::Browser.new
+url = 'https://cloud2x-testing:Eb6E322Du@survey.vfnet.de/gigui/individuals/index'
+@browser.goto url
+Watir::Wait.until {@browser.text_field(:name => 'msisdn').exist?}
+@browser.text_field(:name => 'msisdn').set '491720451021'
+@browser.button(:class => 'btn btn btn-danger').click
+Watir::Wait.until {@browser.text.include? 'Deleted Entry with MSISDN'}
+@browser.close
 end
 end

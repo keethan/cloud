@@ -4,9 +4,8 @@ Before do |scenario|
 end
 
 After do |scenario|
-puts ' cucumber shouldnot exit now vinay is saying '
   if scenario.failed?
-  puts ' cucumber scenario failed exit now vinay is saying '
+
 begin
 screenshot_embed
 rescue RuntimeError => e
@@ -30,8 +29,8 @@ shutdown_test_server
 rescue RuntimeError => e
   puts "Shuting down the test server"  
  end 
-Cucumber.wants_to_quit = true
-puts ' Scenario fail stopping the test run '
+#Cucumber.wants_to_quit = true
+#puts ' Scenario fail stopping the test run '
 
   else
 
@@ -79,5 +78,6 @@ begin
   shutdown_test_server
 rescue Errno::ECONNRESET => e
   puts "Restarting the test server"
+end
 end
 end
