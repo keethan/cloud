@@ -7,13 +7,31 @@ After do |scenario|
 puts ' cucumber shouldnot exit now vinay is saying '
   if scenario.failed?
   puts ' cucumber scenario failed exit now vinay is saying '
+begin
 screenshot_embed
+rescue RuntimeError => e
+  puts "Cloud app is not yet started" 
+  end 
+begin 
 takewebscreenshot
 $webscreenshot_count += 1
+rescue RuntimeError => e
+  puts "Browser is already closed" 
+  end 
+
+begin
 $browser.close
+rescue RuntimeError => e
+  puts "Browser is already closed" 
+  end 
+  
+begin
+shutdown_test_server
+rescue RuntimeError => e
+  puts "Shuting down the test server"  
+ end 
 Cucumber.wants_to_quit = true
 puts ' Scenario fail stopping the test run '
-shutdown_test_server
 
   else
 
