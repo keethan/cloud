@@ -8,7 +8,7 @@ After do |scenario|
 
 begin
 screenshot_embed
-rescue NoMethodError => e
+rescue RuntimeError => e
   puts "Cloud app is not yet started" 
   end 
 begin 
@@ -45,7 +45,6 @@ end
 
 Cucumber.wants_to_quit = true
 puts ' Scenario fail stopping the test run '
-
   else
 
 #$browser.close

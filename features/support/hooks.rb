@@ -8,7 +8,7 @@ After do |scenario|
 
 begin
 screenshot_embed
-rescue NoMethodError => e
+rescue RuntimeError => e
   puts "Cloud app is not yet started" 
   end 
 begin 
