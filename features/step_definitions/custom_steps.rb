@@ -250,9 +250,10 @@ if waittillviewisshown(view,id)
 elapsedTime = Time.now.to_f - $startTime
    puts "KPI-For-Nagios: cloud;startup|OOBE startup time for cloud app;time="+elapsedTime.to_s+"s"
 else
-        macro 'I take a screenshot'
+        #macro 'I take a screenshot'
         puts 'Safe storage details view was not able to show up in time'
-        exit
+        performAction('wait_for_view_by_id', 'expectedview',1)
+        #exit
         end
 end
 
@@ -266,9 +267,10 @@ if waittillviewisshown(view,id)
         performAction('click_on_view_by_id', 'buttonnext_safestorage_splashscreen')
          $startTime = Time.now.to_f
 else
-        macro 'I take a screenshot'
+        #macro 'I take a screenshot'
         puts 'Automatic upload details view was not able to show up in time'
-        exit
+        performAction('wait_for_view_by_id', 'expectedview',1)
+        #exit
         end
 end
 
@@ -291,9 +293,10 @@ elapsedTime = Time.now.to_f - $startTime
       $startTime = Time.now.to_f
       
 else
-        macro 'I take a screenshot'
+        #macro 'I take a screenshot'
         puts 'Account status was not able to show up in time'
-        exit
+        performAction('wait_for_view_by_id', 'expectedview',1)
+        #exit
         end
 end
 
@@ -306,9 +309,10 @@ elapsedTime = Time.now.to_f - $startTime
 puts "KPI-For-Nagios: cloud;signup|OOBE signup time;time="+elapsedTime.to_s+"s"
 
 else
-       macro 'I take a screenshot'
+       #macro 'I take a screenshot'
         puts 'Not able signup in time'
-exit
+performAction('wait_for_view_by_id', 'expectedview',1)
+#exit
 end
 performAction('wait_for_view_by_id', 'button_next_step')
 performAction('click_on_view_by_id', 'button_next_step')
@@ -330,7 +334,7 @@ performAction('wait_for_view_by_id', 'button_open_camera')
 $donefirstscenario=1
 #$browser.close
 else
-        macro 'I take a screenshot'
+        #macro 'I take a screenshot'
         puts 'Cloud main page was not shown in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
         #exit
@@ -351,9 +355,10 @@ $donefirstscenario=0
 $browser.close
 
 else
-        macro 'I take a screenshot'
+        #macro 'I take a screenshot'
         puts 'Cloud main page with recently added items was not shown in time'
-        exit
+        performAction('wait_for_view_by_id', 'expectedview',1)
+        #exit
 end
 end
 
@@ -365,9 +370,10 @@ if waittillviewisshown(view,id)
 elapsedTime = Time.now.to_f - $startTime
    puts "KPI-For-Nagios: cloud;status|OOBE time for checking existing account status;time="+elapsedTime.to_s+"s"
 else
-        macro 'I take a screenshot'
+        #macro 'I take a screenshot'
         puts 'Account status was not able to show up in time'
-exit
+performAction('wait_for_view_by_id', 'expectedview',1)
+#exit
  end
 end
 
@@ -383,9 +389,11 @@ view='gridview'
 id='latest_items_preview'
 if waittillviewisshown(view,id)
 else
-        macro 'I take a screenshot'
+        #macro 'I take a screenshot'
         puts 'Cloud main page with recently uploaded photos was not shown in time'
-        exit
+       performAction('wait_for_view_by_id', 'expectedview',1)
+        
+        #exit
 end
 end
 
@@ -412,9 +420,10 @@ performAction('wait_for_view_by_id','sliding_menu_item_photos')
 performAction('click_on_view_by_id','sliding_menu_item_photos')
 count = count + 1
  if ((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail') == false && count >= 10) then
-        macro 'I take a screenshot'
+        #macro 'I take a screenshot'
         assert(false ,'Upload picture was not able to show up in time')
-exit
+performAction('wait_for_view_by_id', 'expectedview',1)
+#exit
     else end
     end
 end
@@ -436,9 +445,10 @@ performAction('wait_for_view_by_id','menu_button')
 $browser.close
 
 else
-        macro 'I take a screenshot'
+        #macro 'I take a screenshot'
         puts 'Picture deletion was not done in time'
-        exit
+        performAction('wait_for_view_by_id', 'expectedview',1)
+        #exit
         end
 end
 
@@ -453,9 +463,10 @@ if waittillviewisshown(view,id)
 elapsedTime = Time.now.to_f - $startTime
    puts "KPI-For-Nagios: cloud;startup|OOBE startup time for cloud app;time="+elapsedTime.to_s+"s"
 else
-        macro 'I take a screenshot'
+        #macro 'I take a screenshot'
         puts 'Cloud main page with recently uploaded photos was not shown in time'
-        exit
+        performAction('wait_for_view_by_id', 'expectedview',1)
+        #exit
         end
 end
 
@@ -486,9 +497,10 @@ performAction('wait_for_view_by_id','sliding_menu_item_photos')
 performAction('click_on_view_by_id','sliding_menu_item_photos')
 count = count + 1
  if ((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail') == false && count >= 10) then
-        macro 'I take a screenshot'
+        #macro 'I take a screenshot'
         assert(false ,'Upload picture was not able to show up in time')
-exit
+performAction('wait_for_view_by_id', 'expectedview',1)
+#exit
     else end
 end
 end
@@ -517,9 +529,10 @@ assert_equal((query("textview id:'backup_status_text'").to_s.include? '0 photos'
 
 
 else
-        macro 'I take a screenshot'
+        #macro 'I take a screenshot'
         puts 'Picture deletion was not done in time'
-        exit
+        performAction('wait_for_view_by_id', 'expectedview',1)
+       # exit
         end
 end
 
