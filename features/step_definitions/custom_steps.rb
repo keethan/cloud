@@ -582,4 +582,4 @@ Watir::Wait.until {@browser.text_field(:name => 'msisdn').exist?}
 Watir::Wait.until {@browser.text.include? 'Deleted Entry with MSISDN'}
 @browser.close
 end
-end
+
