@@ -547,14 +547,14 @@ end
 
 def waittillviewisshown(view,id)
 count = 1  
-while (count <=150)
+while (count <=100)
 queryparam = "\""+view+ " id:'" + id + "'"
 sleep 0.2
 if (query(queryparam).to_s.include? id) == true
 return true
 else
 count = count + 1
- if ((query(queryparam).to_s.include? id) == false && count >= 150) then
+ if ((query(queryparam).to_s.include? id) == false && count >= 100) then
 return false
 else end 
 end
