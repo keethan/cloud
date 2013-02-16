@@ -17,7 +17,10 @@ end
 Then /^I delete the subscription for '(.*)'$/ do |msisdn|
 $browser.text_field(:name => 'msisdn').set msisdn
 $browser.button(:class => 'btn btn btn-danger').click
-Watir::Wait.until {$browser.text.include? 'Deleted Entry with MSISDN'}
+if Watir::Wait.until {$browser.text.include? 'Deleted Entry with MSISDN'}
+else
+Watir::Wait.until {$browser.text.include? 'Could not delete'}
+end
 end
 
 def takewebscreenshot 
