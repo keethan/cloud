@@ -28,7 +28,7 @@ else
 
 
 if $donefirstscenario==1
-system 'adb push /home/keethan/Downloads/pictureforcloud.jpeg /sdcard/pictureforcloud.jpeg'
+system 'adb push /home/muthu/Downloads/pictureforcloud.jpeg /sdcard/pictureforcloud.jpeg'
 sleep 2
 system 'adb reboot'
 sleep 80

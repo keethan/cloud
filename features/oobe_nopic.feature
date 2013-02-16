@@ -3,7 +3,7 @@ Feature: TC01.03, 01.04, 01.05, 01.06 Cloud OOBE for a new user
 @web
 Scenario: Delete Subscription for an existing user
 When I login to cloud delete subscription api web page with 'cloud2x-testing' and 'Eb6E322Du'
-Then I delete the subscription for '491720451021'
+Then I delete the subscription for '491720410129'
 Then I take screen shot of web page
 
 @client-nopic
@@ -12,7 +12,7 @@ Given I do not have any files in the device
 Given cloud app is running on the device
 Then I take a screenshot
 Then I should see Safe storage and Automatic upload instruction and I  navigate to next page
-Then I sign up with 'aiosamy15@gmail.com' as email address and 'Keethan12' as password
+Then I sign up with 'aiosamy12@gmail.com' as email address and 'Keethan12' as password
 Then I should see content backup and how to backup settings
 Then I take a screenshot
 Then I proceed with the client to backup later
@@ -22,7 +22,7 @@ Then I take a screenshot
 @web
 Scenario: Delete Subscription for an existing user
 When I login to cloud delete subscription api web page with 'cloud2x-testing' and 'Eb6E322Du'
-Then I delete the subscription for '491720451021'
+Then I delete the subscription for '491720410129'
 Then I take screen shot of web page
 
 @client-pic
@@ -31,7 +31,7 @@ Given I do have picture in the device
 Given cloud app is running on the device
 Then I take a screenshot
 Then I should see Safe storage and Automatic upload instruction and I  navigate to next page
-Then I sign up with 'aiosamy15@gmail.com' as email address and 'Keethan12' as password
+Then I sign up with 'aiosamy12@gmail.com' as email address and 'Keethan12' as password
 Then I should see content backup and how to backup settings
 Then I take a screenshot
 Then I proceed with the client to backup later
@@ -40,7 +40,7 @@ Then I take a screenshot
 
 @web
 Scenario: Upload file from PC to cloud Server
-Given I login to cloud 'Germany' server with 'aiosamy15@gmail.com' as user and 'Keethan12' as password
+Given I login to cloud 'Germany' server with 'aiosamy12@gmail.com' as user and 'Keethan12' as password
 Then I take a screenshot of the cloud server customer page
 Then I upload 'Buddha8.jpeg' picture to the cloud server
 Then I should see the 'Buddha8.jpeg' picture is uploaded in the cloud server
@@ -52,7 +52,7 @@ Given I do have picture in the device
 Given cloud app is running on the device
 Then I take a screenshot
 Then I should see Safe storage and Automatic upload instruction and I  navigate to next page
-Then I should see login page of '491720451021' 
+Then I should see login page of '491720410129' 
 Then I take a screenshot
 When I proceed with login
 Then I should see content backup and how to backup settings
@@ -64,7 +64,7 @@ And I delete the cloud picture from the device
 
 @web
 Scenario: Upload file from PC to cloud Server
-Given I login to cloud 'Germany' server with 'aiosamy15@gmail.com' as user and 'Keethan12' as password
+Given I login to cloud 'Germany' server with 'aiosamy12@gmail.com' as user and 'Keethan12' as password
 Then I take a screenshot of the cloud server customer page
 Then I upload 'Buddha8.jpeg' picture to the cloud server
 Then I should see the 'Buddha8.jpeg' picture is uploaded in the cloud server
