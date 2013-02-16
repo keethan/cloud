@@ -143,7 +143,7 @@ Watir::Wait.until { $browser.file_field.exists? }
 $browser.file_field(:multiple => 'true').set $Picturepath
 $browser.link(:id => 'html5UploadButton').click
 Watir::Wait.until{$browser.link(:title => img).exist?}
-end
+endu
 end
 
 class Picture < BrowserContainer
@@ -641,9 +641,9 @@ elapsedTime = Time.now.to_f - $startTime
    performAction('wait_for_view_by_id', 'registration_email_input')
    performAction('enter_text_into_id_field', 'aiosamy12@gmail.com', 'registration_email_input')
       performAction('wait_for_view_by_id', 'registration_password_input')
-      performAction('enter_text_into_id_field', 'muthu12', 'registration_password_input')
+      performAction('enter_text_into_id_field', 'Keethan12', 'registration_password_input')
       performAction('wait_for_view_by_id', 'registration_password_repeat')
-      performAction('enter_text_into_id_field', 'muthu12', 'registration_password_repeat')
+      performAction('enter_text_into_id_field', 'Keethan12', 'registration_password_repeat')
             performAction('wait_for_view_by_id', 'registration_terms_and_conditions_checkbox')
       performAction('click_on_view_by_id','registration_terms_and_conditions_checkbox')
       performAction('wait_for_view_by_id', 'registration_signup_button')
