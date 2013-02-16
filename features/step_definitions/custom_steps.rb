@@ -143,7 +143,7 @@ Watir::Wait.until { $browser.file_field.exists? }
 $browser.file_field(:multiple => 'true').set $Picturepath
 $browser.link(:id => 'html5UploadButton').click
 Watir::Wait.until{$browser.link(:title => img).exist?}
-endu
+end
 end
 
 class Picture < BrowserContainer
