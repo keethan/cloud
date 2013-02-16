@@ -6,7 +6,8 @@ end
 After do |scenario|
   if scenario.failed?
 
-if $indevice==1
+if ($indevice==1)
+puts ' i am in '
 screenshot_embed
 shutdown_test_server
 else
