@@ -20,11 +20,12 @@ $browser.close
 else
 end
 Cucumber.wants_to_quit = true
+else
 # pass case
 #if $browser.exist? 
 #$browser.close
-else
-end
+
+
 
 if $donefirstscenario==1
 system 'adb push /home/keethan/Downloads/pictureforcloud.jpeg /sdcard/pictureforcloud.jpeg'
