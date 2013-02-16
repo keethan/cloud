@@ -6,11 +6,11 @@ end
 After do |scenario|
   if scenario.failed?
 
-if ($indevice==1)
-puts ' i am in '
+begin
 screenshot_embed
 shutdown_test_server
-else
+rescue rescue Exception => e
+puts ' Taking screen shot and shutding down test server'
 end
 
 if $browser.exist? 

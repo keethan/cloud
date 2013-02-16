@@ -9,7 +9,7 @@ After do |scenario|
 begin
 screenshot_embed
 shutdown_test_server
-rescue rescue Exception => e
+rescue Exception => e
 puts ' Taking screen shot and shutding down test server'
 end
 
