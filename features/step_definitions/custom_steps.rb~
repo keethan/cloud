@@ -256,7 +256,6 @@ else
         #macro 'I take a screenshot'
         puts 'Safe storage details view was not able to show up in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
-        errordevicescreenshot
         #exit
         end
 end
@@ -274,7 +273,6 @@ else
         #macro 'I take a screenshot'
         puts 'Automatic upload details view was not able to show up in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
-        errordevicescreenshot
         #exit
         end
 end
@@ -301,7 +299,6 @@ else
         #macro 'I take a screenshot'
         puts 'Account status was not able to show up in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
-        errordevicescreenshot
         #exit
         end
 end
@@ -318,7 +315,6 @@ else
        #macro 'I take a screenshot'
         puts 'Not able signup in time'
 performAction('wait_for_view_by_id', 'expectedview',1)
-errordevicescreenshot
 #exit
 end
 performAction('wait_for_view_by_id', 'button_next_step')
@@ -344,7 +340,6 @@ else
         #macro 'I take a screenshot'
         puts 'Cloud main page was not shown in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
-        errordevicescreenshot
         #exit
 end
 end
@@ -366,7 +361,6 @@ else
         #macro 'I take a screenshot'
         puts 'Cloud main page with recently added items was not shown in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
-        errordevicescreenshot
         #exit
 end
 end
@@ -382,7 +376,6 @@ else
         #macro 'I take a screenshot'
         puts 'Account status was not able to show up in time'
 performAction('wait_for_view_by_id', 'expectedview',1)
-errordevicescreenshot
 #exit
  end
 end
@@ -402,7 +395,7 @@ else
         #macro 'I take a screenshot'
         puts 'Cloud main page with recently uploaded photos was not shown in time'
        performAction('wait_for_view_by_id', 'expectedview',1)
-        errordevicescreenshot
+        
         #exit
 end
 end
@@ -433,7 +426,6 @@ count = count + 1
         #macro 'I take a screenshot'
         assert(false ,'Upload picture was not able to show up in time')
 performAction('wait_for_view_by_id', 'expectedview',1)
-errordevicescreenshot
 #exit
     else end
     end
@@ -459,7 +451,6 @@ else
         #macro 'I take a screenshot'
         puts 'Picture deletion was not done in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
-        errordevicescreenshot
         #exit
         end
 end
@@ -479,7 +470,6 @@ else
         #macro 'I take a screenshot'
         puts 'Cloud main page with recently uploaded photos was not shown in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
-        errordevicescreenshot
         #exit
         end
 end
@@ -514,7 +504,6 @@ count = count + 1
         #macro 'I take a screenshot'
         assert(false ,'Upload picture was not able to show up in time')
 performAction('wait_for_view_by_id', 'expectedview',1)
-errordevicescreenshot
 #exit
     else end
 end
@@ -547,7 +536,6 @@ else
         #macro 'I take a screenshot'
         puts 'Picture deletion was not done in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
-        errordevicescreenshot
        # exit
         end
 end
@@ -616,15 +604,6 @@ Watir::Wait.until {@browser.text.include? 'Deleted Entry with MSISDN'}
 end
 
 
-
-def errordevicescreenshot
-if $indevice==1
-screenshot_embed
-shutdown_test_server
-else
-end
-end
-
 Then /^I signup$/ do
 
   start_test_server_in_background
@@ -636,7 +615,6 @@ else
         #macro 'I take a screenshot'
         puts 'Safe storage details view was not able to show up in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
-        errordevicescreenshot
         #exit
         end
 
@@ -652,7 +630,6 @@ else
         #macro 'I take a screenshot'
         puts 'Automatic upload details view was not able to show up in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
-        errordevicescreenshot
         #exit
         end
 
@@ -677,7 +654,6 @@ else
         #macro 'I take a screenshot'
         puts 'Account status was not able to show up in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
-        errordevicescreenshot
         #exit
         end
 
@@ -689,7 +665,6 @@ else
        #macro 'I take a screenshot'
         puts 'Not able signup in time'
 performAction('wait_for_view_by_id', 'expectedview',1)
-errordevicescreenshot
 #exit
 end
 performAction('wait_for_view_by_id', 'button_next_step')
