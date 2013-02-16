@@ -137,7 +137,7 @@ class Upload < BrowserContainer
 
 def uploadpicturefile(img)
 #local_file='/home/keethan/Downloads/Buddha8.jpeg' 
-$Picturepath = '/home/keethan/Downloads/Buddha8.jpeg'
+#$Picturepath = '/home/keethan/Downloads/Buddha8.jpeg'
 #$Picturename = 'Buddha8.jpeg'
 Watir::Wait.until { $browser.file_field.exists? }
 $browser.file_field(:multiple => 'true').set $Picturepath
@@ -338,7 +338,7 @@ performAction('wait_for_view_by_id', 'button_open_camera')
 $browser.close
 else
         #macro 'I take a screenshot'
-        puts 'Cloud main page was not shown in time'
+        puts 'Cloud main page with take photo option was not shown in time'
         performAction('wait_for_view_by_id', 'expectedview',1)
         #exit
 end
