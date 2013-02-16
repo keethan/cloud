@@ -6,10 +6,9 @@ end
 After do |scenario|
   if scenario.failed?
 
-if $device==1
+if $indevice==1
 screenshot_embed
 shutdown_test_server
-$device=0
 else
 end
 
@@ -41,7 +40,7 @@ After('@client-nopic') do
 begin
   #doc = Nokogiri::HTML(open(url))
   shutdown_test_server
-  $device=0
+  $indevice=0
 rescue Errno::ECONNRESET => e
   puts "Restarting the test server"
 end
@@ -51,7 +50,7 @@ After('@client-pic') do
 begin
   #doc = Nokogiri::HTML(open(url))
   shutdown_test_server
-  $device=0
+  $indevice=0
 rescue Errno::ECONNRESET => e
   puts "Restarting the test server"
 end
@@ -61,7 +60,7 @@ After('@client-cloudpic') do
 begin
   #doc = Nokogiri::HTML(open(url))
   shutdown_test_server
-  $device=0
+  $indevice=0
 rescue Errno::ECONNRESET => e
   puts "Restarting the test server"
 end
@@ -71,7 +70,7 @@ After('@client-cloudpic-upload') do
 begin
   #doc = Nokogiri::HTML(open(url))
   shutdown_test_server
-  $device=0
+  $indevice=0
 rescue Errno::ECONNRESET => e
   puts "Restarting the test server"
 end

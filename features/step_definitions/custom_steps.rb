@@ -3,6 +3,7 @@ require 'test/unit'
 include Test::Unit::Assertions
 $webscreenshot_count = 0
 $donefirstscenario=0
+$indevice=0
 #At subscription deletion API web page
 
 When /^I login to cloud delete subscription api web page with '(.*)' and '(.*)'$/ do |username, password|
@@ -245,7 +246,7 @@ end
 Given /^cloud app is running on the device$/ do
   $startTime = Time.now.to_f
   start_test_server_in_background
-  $device=1
+  $indevice=1
 view='textview'
 id ='textView_safe_storage_splashscreen_descr'
 if waittillviewisshown(view,id)
@@ -459,7 +460,7 @@ end
 Given /^cloud app is registered and running in the device$/ do
   $startTime = Time.now.to_f
   start_test_server_in_background
-  $device=1
+  $indevice=1
 view='gridview'
 id='latest_items_preview'
 if waittillviewisshown(view,id)
@@ -606,7 +607,7 @@ end
 Then /^I signup$/ do
 
   start_test_server_in_background
-  $device=1
+  $indevice=1
 view='textview'
 id ='textView_safe_storage_splashscreen_descr'
 if waittillviewisshown(view,id)

@@ -9,7 +9,6 @@ After do |scenario|
 if $device==1
 screenshot_embed
 shutdown_test_server
-$device=0
 else
 end
 
