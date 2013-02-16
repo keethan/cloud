@@ -19,11 +19,11 @@ $webscreenshot_count += 1
 $browser.close
 else
 end
-
+Cucumber.wants_to_quit = true
 # pass case
 else
-if $browser.exist? 
-$browser.close
+#if $browser.exist? 
+#$browser.close
 else
 end
 

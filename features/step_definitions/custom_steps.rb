@@ -2,10 +2,11 @@ require 'watir-webdriver'
 require 'test/unit'
 include Test::Unit::Assertions
 $webscreenshot_count = 0
+$donefirstscenario=0
 #At subscription deletion API web page
 
 When /^I login to cloud delete subscription api web page with '(.*)' and '(.*)'$/ do |username, password|
-$donefirstscenario=0
+
 $browser = Watir::Browser.new
 url = 'https://'+username+':'+password+'@survey.vfnet.de/gigui/individuals/index'
 $browser.goto url
@@ -221,7 +222,7 @@ end
 
 Then /^I take a screenshot of the cloud server myfiles page$/ do
 takewebscreenshot
-#$browser.close
+$browser.close
 
 end
 
@@ -329,11 +330,11 @@ end
 
 Then /^I am successfully login to cloud app with option to take a photo$/ do
 view='textview'
+$donefirstscenario=1
 id='texts_hint_nophoto'
 if waittillviewisshown(view,id)
 performAction('wait_for_view_by_id', 'button_open_camera')
-$donefirstscenario=1
-#$browser.close
+$browser.close
 else
         #macro 'I take a screenshot'
         puts 'Cloud main page was not shown in time'
@@ -353,7 +354,7 @@ view='gridview'
 id='latestImages'
 if waittillviewisshown(view,id)
 $donefirstscenario=0
-#$browser.close
+$browser.close
 
 else
         #macro 'I take a screenshot'
@@ -443,7 +444,7 @@ id='delete_file_done_button'
 if waittillviewisshown(view,id)
 performAction('click_on_view_by_id' , 'delete_file_done_button')
 performAction('wait_for_view_by_id','menu_button')
-#$browser.close
+$browser.close
 
 else
         #macro 'I take a screenshot'

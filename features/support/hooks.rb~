@@ -19,10 +19,11 @@ $webscreenshot_count += 1
 $browser.close
 else
 end
+
 # pass case
 else
-if $browser.exist? 
-$browser.close
+#if $browser.exist? 
+#$browser.close
 else
 end
 
