@@ -588,6 +588,7 @@ Watir::Wait.until{$browser.link(:id => 'confirmDeleteForever').exist?}
 $browser.link(:id => 'confirmDeleteForever').click
 sleep 3
 Watir::Wait.until{$browser.div(:class => 'thumbnail folderRow small_').exist?}
+takewebscreenshot
 $browser.close
 end
 
