@@ -568,27 +568,27 @@ end
 #needed when scenarion failed going to be executed via script in jenkins
 
 def deletepicture
-@browser = Watir::Browser.new
-@browser.goto 'https://cloud-pp.vodafone.de/'
-Watir::Wait.until { @browser.text_field(:name => "username").exists? }
-@browser.text_field(:name => "username").set 'aiosamy12@gmail.com'
-@browser.text_field(:type => "password").set 'Keethan12'
-@browser.button(:class => "buttonAubergine").click
-Watir::Wait.until { @browser.link(:id => 'myfiles').exists? }
-@browser.link(:id => 'myfiles').click
+$browser = Watir::Browser.new
+$browser.goto 'https://cloud-pp.vodafone.de/'
+Watir::Wait.until { $browser.text_field(:name => "username").exists? }
+$browser.text_field(:name => "username").set 'aiosamy12@gmail.com'
+$browser.text_field(:type => "password").set 'Keethan12'
+$browser.button(:class => "buttonAubergine").click
+Watir::Wait.until { $browser.link(:id => 'myfiles').exists? }
+$browser.link(:id => 'myfiles').click
 sleep 2
-Watir::Wait.until{@browser.div(:class => 'thumbnail folderRow small_').exist?}
-Watir::Wait.until{@browser.link(:title => 'Buddha8.jpeg').exist?}
-@browser.link(:title => 'Buddha8.jpeg').right_click
+Watir::Wait.until{$browser.div(:class => 'thumbnail folderRow small_').exist?}
+Watir::Wait.until{$browser.link(:title => 'Buddha8.jpeg').exist?}
+$browser.link(:title => 'Buddha8.jpeg').right_click
 
-Watir::Wait.until{@browser.link(:id => 'FileOptionsMenu_filemenu.delete').exist?}
-@browser.link(:id => 'FileOptionsMenu_filemenu.delete').click
+Watir::Wait.until{$browser.link(:id => 'FileOptionsMenu_filemenu.delete').exist?}
+$browser.link(:id => 'FileOptionsMenu_filemenu.delete').click
 
-Watir::Wait.until{@browser.link(:id => 'confirmDeleteForever').exist?}
-@browser.link(:id => 'confirmDeleteForever').click
+Watir::Wait.until{$browser.link(:id => 'confirmDeleteForever').exist?}
+$browser.link(:id => 'confirmDeleteForever').click
 sleep 3
-Watir::Wait.until{@browser.div(:class => 'thumbnail folderRow small_').exist?}
-@browser.close
+Watir::Wait.until{$browser.div(:class => 'thumbnail folderRow small_').exist?}
+$browser.close
 end
 
 
