@@ -449,6 +449,7 @@ Watir::Wait.until { $browser.link(:id => 'myfiles').exists? }
 $browser.link(:id => 'myfiles').click
 sleep 2
 Watir::Wait.until{$browser.div(:class => 'thumbnail folderRow small_').exist?}
+screenshot_embed
 takewebscreenshot
 $browser.close
 
