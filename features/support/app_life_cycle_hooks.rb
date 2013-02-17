@@ -12,12 +12,22 @@ After do |scenario|
   if scenario.failed?
    begin
   screenshot_embed
+rescue Exception => e
+  puts "Taking screen shot"
+ end
+  
+     begin
   shutdown_test_server
-  $indevice=0
 rescue Exception => e
   puts "Shutting down the test server"
 end
+
 else
- # shutdown_test_server
+end
+
+   begin
+  shutdown_test_server
+rescue Exception => e
+  puts "Shutting down the test server"
 end
 end
