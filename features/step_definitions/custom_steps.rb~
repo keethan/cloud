@@ -413,7 +413,7 @@ sleep 1
 
 #puts (query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail')
 if ((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail') == true)
-assert_equal((query("textview id:'backup_status_text'").to_s.include? '1 photo'), true)
+#assert_equal((query("textview id:'backup_status_text'").to_s.include? '1 photo'), true)
 break
 else
 performAction('go_back')
@@ -424,7 +424,7 @@ performAction('click_on_view_by_id','sliding_menu_item_photos')
 count = count + 1
  if ((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail') == false && count >= 10) then
         macro 'I take a screenshot'
-        assert(false ,'Upload picture was not able to show up in time')
+        puts 'Upload picture was not able to show up in time'
 performAction('wait_for_view_by_id', 'expectedview',1)
 #exit
     else end
@@ -445,6 +445,10 @@ id='delete_file_done_button'
 if waittillviewisshown(view,id)
 performAction('click_on_view_by_id' , 'delete_file_done_button')
 performAction('wait_for_view_by_id','menu_button')
+Watir::Wait.until { $browser.link(:id => 'myfiles').exists? }
+$browser.link(:id => 'myfiles').click
+sleep 2
+Watir::Wait.until{$browser.div(:class => 'thumbnail folderRow small_').exist?}
 $browser.close
 
 else
@@ -502,7 +506,7 @@ performAction('click_on_view_by_id','sliding_menu_item_photos')
 count = count + 1
  if ((query("imageview id:'media_griditem_thumbnail'").to_s.include? 'media_griditem_thumbnail') == false && count >= 10) then
         macro 'I take a screenshot'
-        assert(false ,'Upload picture was not able to show up in time')
+        puts 'Upload picture was not able to show up in time'
 performAction('wait_for_view_by_id', 'expectedview',1)
 #exit
     else end
@@ -588,6 +592,7 @@ Watir::Wait.until{$browser.link(:id => 'confirmDeleteForever').exist?}
 $browser.link(:id => 'confirmDeleteForever').click
 sleep 3
 Watir::Wait.until{$browser.div(:class => 'thumbnail folderRow small_').exist?}
+takewebscreenshot
 $browser.close
 end
 
