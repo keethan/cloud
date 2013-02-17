@@ -21,13 +21,6 @@ else
 end
 Cucumber.wants_to_quit = true
 else
-
-begin
-  shutdown_test_server
-  $indevice=0
-rescue Errno::ECONNRESET => e
-  puts "Restarting the test server"
-end
 # pass case
 #if $browser.exist? 
 #$browser.close
@@ -44,42 +37,42 @@ end
 end
 end
 
-#After('@client-nopic') do
-#begin
-#  #doc = Nokogiri::HTML(open(url))
-#  shutdown_test_server
-#  $indevice=0
-#rescue Errno::ECONNRESET => e
-#  puts "Restarting the test server"
-#end
-#end
+After('@client-nopic') do
+begin
+  #doc = Nokogiri::HTML(open(url))
+  shutdown_test_server
+  $indevice=0
+rescue Errno::ECONNRESET => e
+  puts "Restarting the test server"
+end
+end
 
-#After('@client-pic') do
-#begin
-#  #doc = Nokogiri::HTML(open(url))
-#  shutdown_test_server
-#  $indevice=0
-#rescue Errno::ECONNRESET => e
-#  puts "Restarting the test server"
-#end
-#end
+After('@client-pic') do
+begin
+  #doc = Nokogiri::HTML(open(url))
+  shutdown_test_server
+  $indevice=0
+rescue Errno::ECONNRESET => e
+  puts "Restarting the test server"
+end
+end
 
-#After('@client-cloudpic') do
-#begin
-#  #doc = Nokogiri::HTML(open(url))
-#  shutdown_test_server
-#  $indevice=0
-#rescue Errno::ECONNRESET => e
-#  puts "Restarting the test server"
-#end
-#end
+After('@client-cloudpic') do
+begin
+  #doc = Nokogiri::HTML(open(url))
+  shutdown_test_server
+  $indevice=0
+rescue Errno::ECONNRESET => e
+  puts "Restarting the test server"
+end
+end
 
-#After('@client-cloudpic-upload') do
-#begin
-#  #doc = Nokogiri::HTML(open(url))
-#  shutdown_test_server
-#  $indevice=0
-#rescue Errno::ECONNRESET => e
-#  puts "Restarting the test server"
-#end
-#end
+After('@client-cloudpic-upload') do
+begin
+  #doc = Nokogiri::HTML(open(url))
+  shutdown_test_server
+  $indevice=0
+rescue Errno::ECONNRESET => e
+  puts "Restarting the test server"
+end
+end
