@@ -6,12 +6,12 @@ end
 After do |scenario|
   if scenario.failed?
 
-begin
-screenshot_embed
-shutdown_test_server
-rescue Exception => e
-puts ' Taking screen shot and shutding down test server'
-end
+#begin
+#screenshot_embed
+#shutdown_test_server
+#rescue Exception => e
+#puts ' Taking screen shot and shutding down test server'
+#end
 
 if $browser.exist? 
 takewebscreenshot
