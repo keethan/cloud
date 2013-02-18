@@ -26,6 +26,7 @@ if $browser.exist?
 $browser.close
 else
 end
+end
 
 
 #if $donefirstscenario==1
