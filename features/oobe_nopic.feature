@@ -6,7 +6,7 @@ When I login to cloud delete subscription api web page with 'cloud2x-testing' an
 Then I delete the subscription for '491720451021'
 Then I take screen shot of web page
 
-@client-nopic
+@client
 Scenario: Cloud client first launch for a new user with no pictures in device and cloud
 Given I do not have any files in the device
 Given cloud app is running on the device
@@ -25,7 +25,7 @@ When I login to cloud delete subscription api web page with 'cloud2x-testing' an
 Then I delete the subscription for '491720451021'
 Then I take screen shot of web page
 
-@client-pic
+@client
 Scenario: Cloud client first launch for a new user with pictures in device and not in cloud
 Given I do have picture in the device
 Given cloud app is running on the device
@@ -46,9 +46,9 @@ Then I upload 'Buddha8.jpeg' picture to the cloud server
 Then I should see the 'Buddha8.jpeg' picture is uploaded in the cloud server
 Then I take a screenshot of the cloud server customer page
 
-@client-cloudpic
+@client
 Scenario: Cloud Client first launch for an existing user with picture in device and cloud
-Given I do have picture in the device
+Given I do have picture in the device and in cloud
 Given cloud app is running on the device
 Then I take a screenshot
 Then I should see Safe storage and Automatic upload instruction and I  navigate to next page
@@ -70,7 +70,7 @@ Then I upload 'Buddha8.jpeg' picture to the cloud server
 Then I should see the 'Buddha8.jpeg' picture is uploaded in the cloud server
 Then I take a screenshot of the cloud server customer page
 
-@client-cloudpic-upload
+@client
 Scenario: Open cloud app and check the uploaded picture
 Given cloud app is registered and running in the device
 Then I open the cloud photos menu
