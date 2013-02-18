@@ -621,7 +621,7 @@ $browser.link(:id => 'myfiles').click
 sleep 2
 Watir::Wait.until{$browser.div(:class => 'thumbnail folderRow small_').exist?}
 Watir::Wait.until{$browser.link(:title => ENV["picturename]").exist?}
-$browser.link(:title => ${picturename}).right_click
+$browser.link(:title => ENV["picturename"]).right_click
 
 Watir::Wait.until{$browser.link(:id => 'FileOptionsMenu_filemenu.delete').exist?}
 $browser.link(:id => 'FileOptionsMenu_filemenu.delete').click
