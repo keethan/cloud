@@ -741,3 +741,4 @@ deletepicture
 rescue Exception => e
 $browser.close
 end
+end
