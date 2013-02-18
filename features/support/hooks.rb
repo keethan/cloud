@@ -21,9 +21,9 @@ else
 end
 #Cucumber.wants_to_quit = true
 else
-# pass case
-#if $browser.exist? 
-#$browser.close
+pass case
+if $browser.exist? 
+$browser.close
 
 
 
