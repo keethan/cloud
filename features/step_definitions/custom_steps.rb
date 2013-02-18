@@ -613,14 +613,14 @@ def deletepicture
 $browser = Watir::Browser.new
 $browser.goto 'https://cloud-pp.vodafone.de/'
 Watir::Wait.until { $browser.text_field(:name => "username").exists? }
-$browser.text_field(:name => "username").set ${username}
-$browser.text_field(:type => "password").set ${password}
+$browser.text_field(:name => "username").set ENV["username"]
+$browser.text_field(:type => "password").set ENV["password"]
 $browser.button(:class => "buttonAubergine").click
 Watir::Wait.until { $browser.link(:id => 'myfiles').exists? }
 $browser.link(:id => 'myfiles').click
 sleep 2
 Watir::Wait.until{$browser.div(:class => 'thumbnail folderRow small_').exist?}
-Watir::Wait.until{$browser.link(:title => ${picturename}).exist?}
+Watir::Wait.until{$browser.link(:title => ENV["picturename]").exist?}
 $browser.link(:title => ${picturename}).right_click
 
 Watir::Wait.until{$browser.link(:id => 'FileOptionsMenu_filemenu.delete').exist?}
@@ -640,7 +640,7 @@ def deletemsisdn
 url = 'https://cloud2x-testing:Eb6E322Du@survey.vfnet.de/gigui/individuals/index'
 @browser.goto url
 Watir::Wait.until {@browser.text_field(:name => 'msisdn').exist?}
-@browser.text_field(:name => 'msisdn').set ${MSISDN}
+@browser.text_field(:name => 'msisdn').set ENV["MSISDN"]
 @browser.button(:class => 'btn btn btn-danger').click
 Watir::Wait.until {@browser.text.include? 'Deleted Entry with MSISDN'}
 @browser.close
@@ -683,11 +683,11 @@ if waittillviewisshown(view,id)
 elapsedTime = Time.now.to_f - $startTime
    puts "KPI-For-Nagios: cloud;status|OOBE time for checking account status;time="+elapsedTime.to_s+"s"
    performAction('wait_for_view_by_id', 'registration_email_input')
-   performAction('enter_text_into_id_field', 'aiosamy12@gmail.com', 'registration_email_input')
+   performAction('enter_text_into_id_field', ENV["username"], 'registration_email_input')
       performAction('wait_for_view_by_id', 'registration_password_input')
-      performAction('enter_text_into_id_field', 'Keethan12', 'registration_password_input')
+      performAction('enter_text_into_id_field', ENV["password"], 'registration_password_input')
       performAction('wait_for_view_by_id', 'registration_password_repeat')
-      performAction('enter_text_into_id_field', 'Keethan12', 'registration_password_repeat')
+      performAction('enter_text_into_id_field', ENV["password"], 'registration_password_repeat')
             performAction('wait_for_view_by_id', 'registration_terms_and_conditions_checkbox')
       performAction('click_on_view_by_id','registration_terms_and_conditions_checkbox')
       performAction('wait_for_view_by_id', 'registration_signup_button')
