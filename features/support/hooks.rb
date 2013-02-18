@@ -24,7 +24,8 @@ else
 pass case
 if $browser.exist? 
 $browser.close
-
+else
+end
 
 
 #if $donefirstscenario==1
