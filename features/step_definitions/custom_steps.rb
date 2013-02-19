@@ -198,6 +198,14 @@ end
 
 Given /^I login to cloud '(.*)' server with '(.*)' as user and '(.*)' as password$/ do |opco, username,password|
 
+# Executing pre condition
+begin
+macro 'I signup'
+puts ' executing precondition signup'
+rescue Exception => e
+puts ' executing precondition signup'
+end
+
 findurl(opco)
    @login_page = site.login_page.open
    user_page = @login_page.login_as(username,password)
