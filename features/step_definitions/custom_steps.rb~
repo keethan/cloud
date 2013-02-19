@@ -369,7 +369,7 @@ Given /^I do have picture in the device$/ do
 #system 'adb shell pm clear com.vodafone.cloud2'
 begin
 puts ' Executing precondition'
-macro 'I delete cloud picture'
+#macro 'I delete cloud picture'
 system 'adb shell pm clear com.vodafone.cloud2'
 system ENV["push"]
 sleep 2
@@ -721,7 +721,7 @@ performAction('click_on_view_by_id', 'button_next_step')
 
 performAction('wait_for_view_by_id', 'button_backup_later')
 performAction('click_on_view_by_id', 'button_backup_later')
-
+shutdown_test_server
 
 #view='textview'
 #id='My Cloud'
