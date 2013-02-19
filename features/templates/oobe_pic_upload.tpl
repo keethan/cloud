@@ -42,8 +42,8 @@ Then I take a screenshot
 Scenario: Upload file from PC to cloud Server
 Given I login to cloud 'Germany' server with '<email>' as user and '<pass>' as password
 Then I take a screenshot of the cloud server customer page
-Then I upload '<'picname'>' picture to the cloud server
-Then I should see the '<'picname'>' picture is uploaded in the cloud server
+Then I upload '<picname>' picture to the cloud server
+Then I should see the '<picname>' picture is uploaded in the cloud server
 Then I take a screenshot of the cloud server customer page
 
 @client
