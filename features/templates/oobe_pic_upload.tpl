@@ -3,7 +3,7 @@ Feature: TC01.03, 01.04, 01.05, 01.06 Cloud OOBE and picture upload
 @web
 Scenario: Delete Subscription for an existing user
 When I login to cloud delete subscription api web page with 'cloud2x-testing' and 'Eb6E322Du'
-Then I delete the subscription for '<msisdn>'
+Then I delete the subscription for '<number>'
 Then I take screen shot of web page
 
 @client
@@ -22,7 +22,7 @@ Then I take a screenshot
 @web
 Scenario: Delete Subscription for an existing user
 When I login to cloud delete subscription api web page with 'cloud2x-testing' and 'Eb6E322Du'
-Then I delete the subscription for '<msisdn>'
+Then I delete the subscription for '<number>'
 Then I take screen shot of web page
 
 @client
@@ -52,7 +52,7 @@ Given I do have picture in the device and in cloud
 Given cloud app is running on the device
 Then I take a screenshot
 Then I should see Safe storage and Automatic upload instruction and I  navigate to next page
-Then I should see login page of '<msisdn>' 
+Then I should see login page of '<number>' 
 Then I take a screenshot
 When I proceed with login
 Then I should see content backup and how to backup settings
