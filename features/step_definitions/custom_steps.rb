@@ -252,6 +252,7 @@ end
 Given /^I do not have any files in the device$/ do
 #system 'adb shell pm clear com.vodafone.cloud2'
 begin
+puts ' Executing precondition'
 system 'adb shell pm clear com.vodafone.cloud2'
 system'adb shell rm /sdcard/pictureforcloud.jpeg'
 sleep 2
@@ -367,6 +368,7 @@ end
 Given /^I do have picture in the device$/ do
 #system 'adb shell pm clear com.vodafone.cloud2'
 begin
+puts ' Executing precondition'
 macro 'I delete cloud picture'
 system 'adb shell pm clear com.vodafone.cloud2'
 system'adb push /home/muthu/Downloads/pictureforcloud.jpeg /sdcard/pictureforcloud.jpeg'
@@ -493,6 +495,7 @@ end
 
 Given /^I do have picture in the device and in cloud$/ do
 begin
+puts ' Executing precondition'
 system 'adb shell pm clear com.vodafone.cloud2'
 rescue Exception => e
 puts ' Executing precondition'
