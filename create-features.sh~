@@ -7,7 +7,7 @@ do
 	basename=$(basename "$file")
 	name="${basename%.*}"
 	sed 's/<msisdn>/'"$msisdn"'/g
-	 s/<email>/'"$email"'/g
-	 s/<pass>/'"$pass"'/g
-	 s/<picname>/'"$picname"'/g' $file >features/$name.feature
+	sed 's/<email>/'"$email"'/g
+	sed 's/<pass>/'"$pass"'/g
+	sed 's/<picname>/'"$picname"'/g' $file >features/$name.feature
 done

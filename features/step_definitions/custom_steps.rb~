@@ -233,7 +233,7 @@ end
 
 Then /^I take a screenshot of the cloud server myfiles page$/ do
 takewebscreenshot
-#$browser.close
+$browser.close
 
 end
 
@@ -355,7 +355,7 @@ $donefirstscenario=1
 id='texts_hint_nophoto'
 if waittillviewisshown(view,id)
 performAction('wait_for_view_by_id', 'button_open_camera')
-#$browser.close
+$browser.close
 else
         #macro 'I take a screenshot'
         puts 'Cloud main page with take photo option was not shown in time'
@@ -385,7 +385,7 @@ view='gridview'
 id='latestImages'
 if waittillviewisshown(view,id)
 $donefirstscenario=0
-#$browser.close
+$browser.close
 
 else
         #macro 'I take a screenshot'
@@ -481,7 +481,7 @@ sleep 2
 Watir::Wait.until{$browser.div(:class => 'thumbnail folderRow small_').exist?}
 screenshot_embed
 takewebscreenshot
-#$browser.close
+$browser.close
 
 else
         #macro 'I take a screenshot'

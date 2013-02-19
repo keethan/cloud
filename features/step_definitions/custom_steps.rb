@@ -527,7 +527,7 @@ performAction('wait_for_view_by_id','sliding_menu_item_photos')
 performAction('click_on_view_by_id','sliding_menu_item_photos')
 end
 
-Then /^I should see the uploded 'Buddha8.jpeg' picture$/ do
+Then /^I should see the uploded '(.*)' picture$/ do |img|
 
 count = 1
   
