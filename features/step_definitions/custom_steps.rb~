@@ -660,7 +660,7 @@ end
 
 Then /^I signup$/ do
 begin
-system 'adb shell pm clear com.vodafone.cloud2'
+#system 'adb shell pm clear com.vodafone.cloud2'
   start_test_server_in_background
   $indevice=1
 view='textview'
