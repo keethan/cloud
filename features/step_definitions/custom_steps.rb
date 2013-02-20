@@ -742,7 +742,35 @@ shutdown_test_server
 #end
 
 rescue Exception => e
+###### for login button
+begin
+view='textview'
+id='login_userid_info'
+if waittillviewisshown(view,id)
+performAction('press_button_with_text', 'Log in')
+else
+        puts 'Account status was not able to show up in time'
+performAction('wait_for_view_by_id', 'expectedview',1)
+end
+
+
+view='textview'
+id = 'textview_backup_media_type_choices_descr'
+if waittillviewisshown(view,id)
+else
+        puts 'Not able signup in time'
+performAction('wait_for_view_by_id', 'expectedview',1)
+end
+
+performAction('wait_for_view_by_id', 'button_next_step')
+performAction('click_on_view_by_id', 'button_next_step')
+
+performAction('wait_for_view_by_id', 'button_backup_later')
+performAction('click_on_view_by_id', 'button_backup_later')
+
+rescue Exception => e
 shutdown_test_server
+end
 end
 end
 
